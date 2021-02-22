@@ -1,12 +1,15 @@
 import os
 import sys
+
 import requests
+from tqdm import tqdm
 from bs4 import BeautifulSoup
 
 
-def save_file(url, label, directory):
+def fetch_and_save_file(url, label, directory):
     file_data = requests.get(url).content
-    with open(os.path.join(directory, label), 'wb') as handler:
+    file_name = os.path.join('threads', directory, label)
+    with open(file_name, 'wb') as handler:
         handler.write(file_data)
 
 
@@ -23,20 +26,15 @@ def fetch_page(url):
     try:
         return requests.get(url)
     except Exception as ex:
-        # I should probably print the actual error
         print(f'{ex}')
-        exit()
+        exit(1)
 
 
-def figure_out_file_name(soup):
+def figure_out_folder_name(soup):
     subject = soup.find('span', {'class': 'subject'}).text
     message = soup.find('blockquote', {'class': 'postMessage'}).text[:15]
     # short circuit - return first letters of the post, if there is no subject
     return subject or message
-
-
-def file_download_message(idx, all_length, element):
-    return f'{idx+1}/{all_length } | {element.text}'
 
 
 def scrape_files():
@@ -46,18 +44,19 @@ def scrape_files():
 
     soup = BeautifulSoup(data.text, 'html.parser')
 
-    file_name = figure_out_file_name(soup)
+    folder_name = figure_out_folder_name(soup)
 
-    make_dir(file_name)
+    make_dir('threads')
+    make_dir(os.path.join('threads', folder_name))
+    # make_dir(('threads', file_name))
 
     file_elems = (soup.find_all('div', {'class': 'fileText'}))
-    for idx, file_elem in enumerate(file_elems):
+    for file_elem in tqdm(file_elems):
         anchor = file_elem.find('a')
         # url has a weird formatting
         url = f'http:{anchor.attrs["href"]}'
-        label = f'{str(idx).zfill(3)}-{anchor.string}'
-        print(file_download_message(idx, len(file_elems), file_elem))
-        save_file(url, label, file_name)
+        print(url, anchor.string, folder_name)
+        fetch_and_save_file(url, anchor.string, folder_name)
 
 
 def save_to_csv():
