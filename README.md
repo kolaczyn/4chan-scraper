@@ -2,17 +2,28 @@
 
 This is a 4chan scraper written in Python. You should be able to download anything from any board - images and videos
 
-## Setup
+## Setup and Usage Example
 
-You need have Python 3.6+ installed on your system.
-TODO Finish this section
+You need to have the following pieces of software installed on your system:
+- git
+- Python 3, at least 3.6
+- pip
+- [pipenv](https://pipenv.pypa.io/en/latest/)
 
-## Usage Example
+Run the following commands:
+```
+git clone https://github.com/kolaczyn/4chan-scraper.git
+cd 4chan-scraper
 
-python scrape_chan.py 'thread link goes here'
+pipenv install
+pipenv shell
+
+# to scrape, 
 python scrape_chan.py https://boards.4channel.org/g/thread/76759434
 
-The links from 4chan don't include special character like & which could mess up 
+```
+
+You don't have to wrap the links in **'parenthesis'**, because the links to 4chan threads don't seem to include special characters like **&**.
 
 
 ## User Stories
