@@ -2,6 +2,13 @@
 
 This is a 4chan scraper written in Python. You should be able to download anything from any board - images and videos.
 
+#### Table of Contents
+
+1. [Setup](#setup)
+1. [How To Use It](#how-to-use-it)
+1. [Running Tests](#running-tests)
+1. [User Stories](#user-stories)
+
 ## Setup
 
 You need to have the following pieces of software installed on your system:
@@ -22,7 +29,8 @@ pipenv install
 
 ## How To Use It
 
-It looks self explanatory - the first argument of the application is the link to the thread you want to scrape.
+You first have to follow the instructions in [the Setup section](#setup).
+You run it like any other command base program. The first argument of the application is the link to the thread you want to scrape.
 
 ```shell
 # enter the virtual environment
