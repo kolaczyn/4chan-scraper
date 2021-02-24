@@ -8,6 +8,7 @@ from bs4 import BeautifulSoup
 
 def fetch_page(url: "string"):
     """fetches the page with the request module, exists on any exception"""
+    print('Fetching website...')
     try:
         return requests.get(url)
     except requests.exceptions.RequestException as e:
@@ -61,8 +62,3 @@ def scrape_files(thread_link):
         anchor = file_elem.find('a')
         url = f'http:{anchor.attrs["href"]}'
         fetch_and_save_file(url, thread_name, label=anchor.string)
-
-
-if __name__ == '__main__':
-    thread_link = sys.argv[1]
-    scrape_files(thread_link)

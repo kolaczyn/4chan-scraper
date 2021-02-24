@@ -13,24 +13,23 @@ You need to have the following pieces of software installed on your system:
 
 Run the following commands:
 
-```
+```shell
 git clone https://github.com/kolaczyn/4chan-scraper.git
 cd 4chan-scraper
 
 pipenv install
 ```
 
-## How to use it
+## How To Use It
 
 It looks self explanatory - the first argument of the application is the link to the thread you want to scrape.
 
-```
+```shell
 # enter the virtual environment
 pipenv shell
 
-python scrape_chan.py https://boards.4channel.org/g/thread/76759434
-python scrape_chan.py https://boards.4channel.org/sci/thread/5942502
-
+python main.py https://boards.4channel.org/g/thread/76759434
+python main.py https://boards.4channel.org/sci/thread/5942502
 ```
 
 After it finishes downloading, you can find the scraped files in the `threads/` folder.
@@ -43,17 +42,17 @@ The way I test if the program works, is I setup a basic Flask server and fetch f
 
 Here's how you can setup testing:
 
-```
+```shell
 pipenv install --dev
 pipenv shell
 
 # setup flask
-export FLASK_APP=testing/server/main.py
+export FLASK_APP=scrape_chan/testing/server
 export FLASK_ENV=development
 flask run
 
 # run the tests in another terminal
-python testing/main.py
+python scrape_chan/testing
 ```
 
 ## User Stories
@@ -65,3 +64,4 @@ List of features I want to add in the future.
 - You can say that you only want jpg, png, wemb or gif
 - Limit how many you want
 - You can come back leter and download ony new file and you don't have to redownload the old ones
+- Stop downloading
