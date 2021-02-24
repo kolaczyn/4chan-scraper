@@ -54,6 +54,8 @@ def scrape_files(thread_link):
     make_dir('threads')
     make_dir(os.path.join('threads', thread_name))
 
+    # inside div with a class="fileText", there an anchor tag, 
+    # which holds the link to the file and the file's name
     file_elems = (soup.find_all('div', {'class': 'fileText'}))
     for file_elem in tqdm(file_elems):
         anchor = file_elem.find('a')

@@ -37,6 +37,25 @@ After it finishes downloading, you can find the scraped files in the `threads/` 
 
 You don't have to wrap the links in `''` or `""` because the links to 4chan threads don't seem to include special characters like `&`.
 
+## Running Tests
+
+The way I test if the program works, is I setup a basic Flask server and fetch files from there.
+
+Here's how you can setup testing:
+
+```
+pipenv install --dev
+pipenv shell
+
+# setup flask
+export FLASK_APP=testing/server/main.py
+export FLASK_ENV=development
+flask run
+
+# run the tests in another terminal
+python testing/main.py
+```
+
 ## User Stories
 
 List of features I want to add in the future.

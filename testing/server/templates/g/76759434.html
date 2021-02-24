@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="fileText">
+    File:
+    <a href="{{ url_for('static', filename='first_post.txt') }}">sticky.txt</a>
+    size: 8B
+  </div>
+  <div class="fileText">
+    File:
+    <a href="{{ url_for('static', filename='second_post.txt') }}">I am second post</a>
+    size: 8B
+  </div>
+{% endblock content %}
